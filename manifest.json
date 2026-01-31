@@ -1,0 +1,15 @@
+{
+  "name": "SENTINELLE V11.8 - A.LEMONFA",
+  "short_name": "Sentinelle",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#010204",
+  "theme_color": "#00d2ff",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2555/2555572.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
