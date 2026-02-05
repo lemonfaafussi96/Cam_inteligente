@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <title>AFUSSI ULTRA IA PRO</title>
+    <style>
+        :root { --main: #00f2ff; --bg: #020202; }
+        body { background: var(--bg); color: white; font-family: 'Orbitron', sans-serif; text-align: center; margin: 0; padding: 20px; }
+        .console { border: 2px solid var(--main); border-radius: 15px; padding: 20px; box-shadow: 0 0 40px rgba(0,242,255,0.1); max-width: 600px; margin: auto; }
+        input, textarea { width: 90%; padding: 15px; margin: 10px 0; background: #0a0a0a; color: white; border: 1px solid var(--main); border-radius: 5px; font-family: sans-serif; }
+        .btn { background: var(--main); color: black; padding: 18px; border: none; border-radius: 5px; font-weight: bold; width: 100%; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        .report-btn { background: white; color: black; }
+        #display { margin-top: 25px; text-align: left; padding: 15px; background: #050505; border-radius: 5px; border-left: 5px solid var(--main); min-height: 150px; white-space: pre-wrap; font-family: sans-serif; }
+        .status-on { color: #0f0; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div class="console">
+        <h1><span class="status-on">●</span> AFUSSI ULTRA v2026</h1>
+        <p>AGENT AUTONOME DE HAUTE GAMME</p>
+        <input type="password" id="pin" placeholder="CODE PIN SÉCURITÉ">
+        <textarea id="task" rows="5" placeholder="Mission (Gmail, ComeUp, Création Vidéo, Article...)"></textarea>
+        
+        <button class="btn" onclick="execute()">LANCER L'IA</button>
+        <button class="btn report-btn" onclick="fetchReport()">BILAN DE LA JOURNÉE</button>
+        <button class="btn" style="background: #222; color: var(--main);" onclick="startVocal()">COMMANDE VOCALE</button>
+        
+        <div id="display">Système prêt. En attente de déverrouillage...</div>
+    </div>
+
+    <script>
+        async function execute() {
+            const out = document.getElementById('display');
+            out.innerText = "Traitement autonome en cours...";
+            const res = await fetch('/api/task', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ pin: document.getElementById('pin').value, instruction: document.getElementById('task').value })
+            });
+            const data = await res.json();
+            out.innerText = data.output || data.detail;
+            speak("Mission accomplie.");
+        }
+
+        async function fetchReport() {
+            const out = document.getElementById('display');
+            const res = await fetch(`/api/full-report?pin=${document.getElementById('pin').value}`);
+            const data = await res.json();
+            out.innerText = "RAPPORT DE FIN DE JOURNÉE :\n" + data.vocal_summary;
+            speak(data.vocal_summary);
+        }
+
+        function speak(txt) {
+            const u = new SpeechSynthesisUtterance(txt);
+            u.lang = 'fr-FR';
+            window.speechSynthesis.speak(u);
+        }
+
+        function startVocal() {
+            const rec = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            rec.lang = 'fr-FR';
+            rec.onresult = (e) => { document.getElementById('task').value = e.results[0][0].transcript; execute(); };
+            rec.start();
+        }
+    </script>
+</body>
+</html>
