@@ -1,0 +1,9 @@
+{
+  "name": "Afussi Ultra Pro",
+  "short_name": "AfussiIA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020202",
+  "theme_color": "#00f2ff",
+  "icons": [{ "src": "https://i.ibb.co/vz0XfJz/logo-ai.png", "sizes": "512x512", "type": "image/png" }]
+}
