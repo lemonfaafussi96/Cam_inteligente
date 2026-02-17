@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduRap+ Bénin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>EduRap+ Bénin</h1>
+
+  <div id="profile">
+    <label>Nom: <input type="text" id="name"></label>
+    <label>Âge: <input type="number" id="age"></label>
+    <label>Classe: <input type="text" id="classe"></label>
+    <label>Moment préféré:
+      <select id="studyTime">
+        <option value="matin">Matin</option>
+        <option value="jour">Jour</option>
+        <option value="soir">Soir</option>
+        <option value="nuit">Nuit</option>
+      </select>
+    </label>
+    <label>Environnement:
+      <select id="environment">
+        <option value="calme">Calme</option>
+        <option value="bruyant">Bruit</option>
+      </select>
+    </label>
+    <label>Passion/Musique: <input type="text" id="passion"></label>
+  </div>
+
+  <div id="course-section">
+    <select id="matiere">
+      <option value="SVT">SVT</option>
+      <option value="Histoire">Histoire</option>
+      <option value="Economie">Economie</option>
+    </select>
+    <textarea id="coursText" placeholder="Saisir ou sélectionner un cours..."></textarea>
+    <button onclick="generateRap()">Créer mon rap/chanson</button>
+  </div>
+
+  <div id="audio-section">
+    <audio id="audioResult" controls></audio>
+    <div id="rapTextDisplay"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
