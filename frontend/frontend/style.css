@@ -1,7 +1,0 @@
-body { font-family: Arial; margin:20px; background:#f0f8ff; }
-#profile, #course-section { margin-bottom: 20px; }
-textarea { width: 100%; height:100px; }
-button { padding:10px 20px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer; }
-button:hover { background:#0056b3; }
-#audio-section { margin-top:20px; }
-#rapTextDisplay { margin-top:10px; font-weight:bold; color:#333; }
